@@ -1,0 +1,7 @@
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\GuessNumberGame.exe.config
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\GuessNumberGame.exe
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\GuessNumberGame.pdb
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.csprojAssemblyReference.cache
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.csproj.CoreCompileInputs.cache
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.exe
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.pdb
