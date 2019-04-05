@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuessNumberGame.Validators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,8 @@ namespace GuessNumberGame
     {
         static void Main(string[] args)
         {
-            var firstPlayerNumber = 0;
-            var secondPlayerNumber = 0;
+            var hiddenNumber = 0;
+            var optionNumber = 0;
             var minValue = 0;
             var maxValue = 0;
             var attempt = 0;
@@ -28,10 +29,12 @@ namespace GuessNumberGame
             if (key.Key == ConsoleKey.S)
             {
                 Console.Clear();
-                firstPlayerNumber = random.Next(1, 10000);
-                minValue = firstPlayerNumber - random.Next(1, firstPlayerNumber);
-                maxValue = firstPlayerNumber + random.Next(1, firstPlayerNumber);
+                hiddenNumber = random.Next(1, 10000);
+                minValue = hiddenNumber - random.Next(1, hiddenNumber);
+                maxValue = hiddenNumber + random.Next(1, hiddenNumber);
                 maxAttempt = CalcMaxAttempt(minValue, maxValue);
+
+                var rangeValidator = new RangeValidator(minValue, maxValue);
 
                 if (minValue < 0)
                 {
@@ -43,22 +46,22 @@ namespace GuessNumberGame
                     Console.WriteLine($"Guess the number in the range of {minValue} to {maxValue}.");
                     Console.WriteLine($"Attempt {++attempt} out of {maxAttempt}.");
                     Console.WriteLine("Enter the number: ");
-                    secondPlayerNumber = ReadIntFromConsole();
+                    optionNumber = ReadIntFromConsole(rangeValidator);
 
-                    if (secondPlayerNumber > firstPlayerNumber)
+                    if (optionNumber > hiddenNumber)
                     {
-                        Console.WriteLine($"Your number {secondPlayerNumber} is more than hidden number.");
+                        Console.WriteLine($"Your number {optionNumber} is more than hidden number.");
                     }
-                    else if (secondPlayerNumber < firstPlayerNumber)
+                    else if (optionNumber < hiddenNumber)
                     {
-                        Console.WriteLine($"Your number {secondPlayerNumber} is less than hidden number.");
+                        Console.WriteLine($"Your number {optionNumber} is less than hidden number.");
                     }
                     else
                     {
                         win = true;
                     }
 
-                } while (attempt < maxAttempt);
+                } while (!win && attempt < maxAttempt);
 
                 if (win)
                 {
@@ -66,7 +69,7 @@ namespace GuessNumberGame
                 }
                 else
                 {
-                    Console.WriteLine($"Sorry, next time. Number was {firstPlayerNumber}.");
+                    Console.WriteLine($"Sorry, next time. Number was  {hiddenNumber}.");
                 }
                 Console.ReadLine();
             }
@@ -75,37 +78,44 @@ namespace GuessNumberGame
                 Console.Clear();
                 Console.WriteLine("Player 1 pleas enter min value of the range: ");
                 minValue = ReadIntFromConsole();
+
                 Console.WriteLine("Player 1 pleas enter max value of the range: ");
-                maxValue = ReadIntFromConsole();
-                maxAttempt = CalcMaxAttempt(minValue, maxValue);
+                var minValueValidator = new MinValueValidator(minValue);
+                maxValue = ReadIntFromConsole(minValueValidator);
+
+                var rangeValidator = new RangeValidator(minValue, maxValue);
+
                 Console.WriteLine("Player 1 pleas enter the number: ");
-                firstPlayerNumber = ReadIntFromConsole();
+                hiddenNumber = ReadIntFromConsole(rangeValidator);
+
                 Console.Clear();
                 Console.WriteLine("Player 2 are you ready to guess the number?");
                 Console.ReadLine();
                 Console.Clear();
+
+                maxAttempt = CalcMaxAttempt(minValue, maxValue);
 
                 do
                 {
                     Console.WriteLine($"Guess the number in the range of {minValue} to {maxValue}.");
                     Console.WriteLine($"Attempt {++attempt} out of {maxAttempt}.");
                     Console.WriteLine("Enter the number: ");
-                    secondPlayerNumber = ReadIntFromConsole();
+                    optionNumber = ReadIntFromConsole(rangeValidator);
 
-                    if (secondPlayerNumber > firstPlayerNumber)
+                    if (optionNumber > hiddenNumber)
                     {
-                        Console.WriteLine($"Your number {secondPlayerNumber} is more than hidden number.");
+                        Console.WriteLine($"Your number {optionNumber} is more than hidden number.");
                     }
-                    else if (secondPlayerNumber < firstPlayerNumber)
+                    else if (optionNumber < hiddenNumber)
                     {
-                        Console.WriteLine($"Your number {secondPlayerNumber} is less than hidden number.");
+                        Console.WriteLine($"Your number {optionNumber} is less than hidden number.");
                     }
                     else
                     {
                         win = true;
                     }
 
-                } while (attempt < maxAttempt);
+                } while (!win && attempt < maxAttempt);
 
                 if (win)
                 {
@@ -113,22 +123,31 @@ namespace GuessNumberGame
                 }
                 else
                 {
-                    Console.WriteLine($"Sorry, next time. Number was {firstPlayerNumber}.");
+                    Console.WriteLine($"Sorry, next time. Number was {hiddenNumber}.");
                 }
                 Console.ReadLine();
             }
         }
 
-        private static int ReadIntFromConsole()
+        private static int ReadIntFromConsole(IValidator validator = null)
         {
             var input = Console.ReadLine();
             int number;
 
-            while (!int.TryParse(input, out number))
+            do
             {
-                Console.WriteLine("It's not a number. Pleas enter the number: ");
-                input = Console.ReadLine();
-            }
+                if (!string.IsNullOrEmpty(validator?.Error))
+                {
+                    Console.WriteLine(validator.Error);
+                    input = Console.ReadLine(); 
+                }
+
+                while (!int.TryParse(input, out number))
+                {
+                    Console.WriteLine("It's not a number. Pleas enter the number: ");
+                    input = Console.ReadLine();
+                }
+            } while (!validator?.Valid(number) ?? false);
 
             return number;
         }
