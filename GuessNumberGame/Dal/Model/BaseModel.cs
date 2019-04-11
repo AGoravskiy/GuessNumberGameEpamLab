@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuessNumberGame.GameStaff
+namespace Dal.Model
 {
-    class Game
+    public abstract class BaseModel
     {
+        public long Id { get; set; }
     }
 }

@@ -1,7 +1,13 @@
 E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\GuessNumberGame.exe.config
 E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\GuessNumberGame.exe
 E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\GuessNumberGame.pdb
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\Dal.dll
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\Newtonsoft.Json.dll
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\Dal.pdb
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\Newtonsoft.Json.pdb
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\bin\Debug\Newtonsoft.Json.xml
 E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.csprojAssemblyReference.cache
 E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.csproj.CoreCompileInputs.cache
+E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.csproj.CopyComplete
 E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.exe
 E:\EPAM\GuessNumberGameEpamLab\GuessNumberGame\obj\Debug\GuessNumberGame.pdb

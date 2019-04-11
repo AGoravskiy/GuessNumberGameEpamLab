@@ -1,0 +1,9 @@
+E:\EPAM\GuessNumberGameEpamLab\Dal\bin\Debug\netcoreapp2.1\Dal.deps.json
+E:\EPAM\GuessNumberGameEpamLab\Dal\bin\Debug\netcoreapp2.1\Dal.dll
+E:\EPAM\GuessNumberGameEpamLab\Dal\bin\Debug\netcoreapp2.1\Dal.pdb
+E:\EPAM\GuessNumberGameEpamLab\Dal\obj\Debug\netcoreapp2.1\Dal.csprojAssemblyReference.cache
+E:\EPAM\GuessNumberGameEpamLab\Dal\obj\Debug\netcoreapp2.1\Dal.csproj.CoreCompileInputs.cache
+E:\EPAM\GuessNumberGameEpamLab\Dal\obj\Debug\netcoreapp2.1\Dal.AssemblyInfoInputs.cache
+E:\EPAM\GuessNumberGameEpamLab\Dal\obj\Debug\netcoreapp2.1\Dal.AssemblyInfo.cs
+E:\EPAM\GuessNumberGameEpamLab\Dal\obj\Debug\netcoreapp2.1\Dal.dll
+E:\EPAM\GuessNumberGameEpamLab\Dal\obj\Debug\netcoreapp2.1\Dal.pdb
