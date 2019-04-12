@@ -1,36 +1,21 @@
-﻿using Dal.Model;
+﻿using Dal.Helper;
+using Dal.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Dal.Repository
 {
-    class PlayerRepository
+    public class PlayerRepository : BaseRepository<Player>
     {
-        public Player GetPlayer()
-        {
-            return null;
-        }
+        public const string FolderName = "Player";
 
-        public void SavePlayer(Player player)
+        public PlayerRepository() : base(FolderName)
         {
-            var appPath = Environment.CurrentDirectory;
-            var folderPath = "Player";
-            var fileName = $"{player.Id}.json";
-            var path = Path.Combine(appPath, folderPath, fileName);
-            var json = Serialize(player);
-
-            using (var sw = new StreamWriter(path))
-            {
-                sw.Write(json);
-            }  
-        }
-
-        private string Serialize(Player player)
-        {
-            return JsonConvert.SerializeObject(player);
         }
     }
 }
