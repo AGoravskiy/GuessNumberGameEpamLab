@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dal.Model
 {
-    public class Player : BaseModel
+    public class PlayerModel : BaseModel
     {
         public string Name { get; set; }
 
-        public int SoloScore { get; set; }
-
-        public int MultiScore { get; set; }
+        public Dictionary<string, int> Scores { get; set; }
     }
 }

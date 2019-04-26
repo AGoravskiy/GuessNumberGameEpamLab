@@ -1,5 +1,7 @@
 ﻿using Dal.Model;
+using GuessNumGame.Services;
 using GuessNumGame.Validators;
+using GuessNumGame.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,48 +12,39 @@ namespace GuessNumGame.GameStaff
 {
     public class MultiplayerGame : BaseGame
     {
-        public MultiplayerGame(Player player)
+        public MultiplayerGame(PlayerModel player, IMessageService messageService) 
+            : base (messageService)
         {
-            Player = player;
+            gameResources.Player = player;
+            gameResources.GameType = "Multiplayer";
         }
 
         public override void ComeUpWithNumber()
         {
-            Console.Clear();
-            Console.WriteLine("Player 1 pleas enter min value of the range: ");
-            MinValue = ReadIntFromConsole();
 
-            Console.WriteLine("Player 1 pleas enter max value of the range: ");
-            var minValueValidator = new MinValueValidator(MinValue);
-            MaxValue = ReadIntFromConsole(minValueValidator);
+            SetMinMaxValue();
 
-            var rangeValidator = new RangeValidator(MinValue, MaxValue);
+            var rangeValidator = new RangeValidator(gameResources.MinValue, gameResources.MaxValue);
 
-            Console.WriteLine("Player 1 pleas enter the number: ");
-            HiddenNumber = ReadIntFromConsole(rangeValidator);
+            View.Print("Player 1 pleas enter the number: ");
+            gameResources.HiddenNumber = new ControlService().ReadIntFromConsole(rangeValidator);
 
-            Console.Clear();
-            Console.WriteLine("Player 2 are you ready to guess the number?");
-            Console.ReadLine();
-            Console.Clear();
+            MessageService.ReadyToStart();
 
-            MaxAttempt = CalcMaxAttempt(MinValue, MaxValue);
+            gameResources.MaxAttempt = CalcMaxAttempt(gameResources.MinValue, gameResources.MaxValue);
         }
 
-        public override void EndGame()
+        public override void SetMinMaxValue()
         {
-            if (Win)
-            {
-                Player.MultiScore += MaxAttempt - Attempt;
-                Console.WriteLine($"Congratulations, you guessed the number and spend {Attempt} from {MaxAttempt} attempt(s)!");
-                Console.WriteLine($"Your score: {MaxAttempt - Attempt}");
-                Console.WriteLine($"Total score: {Player.MultiScore}");
-            }
-            else
-            {
-                Console.WriteLine($"Sorry, next time. Number was  {HiddenNumber}.");
-            }
-            Console.ReadLine();
+            var consolInput = new ControlService();
+
+            Console.Clear();
+            View.Print("Player 1 pleas enter min value of the range: ");
+            gameResources.MinValue = consolInput.ReadIntFromConsole();
+
+            View.Print("Player 1 pleas enter max value of the range: ");
+            var minValueValidator = new MinValueValidator(gameResources.MinValue);
+            gameResources.MaxValue = consolInput.ReadIntFromConsole(minValueValidator);
         }
     }
 }

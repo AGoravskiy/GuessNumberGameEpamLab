@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dal.IRepository
 {
-    public interface IPlayerRepository : IBaseRepository<Player>
+    public interface IPlayerRepository : IBaseRepository<PlayerModel>
     {
     }
 }

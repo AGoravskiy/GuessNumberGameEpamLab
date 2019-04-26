@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Dal.Repository
 {
-    public class PlayerRepository : BaseRepository<Player>
+    public class PlayerRepository : BaseRepository<PlayerModel>
     {
         public const string FolderName = "Player";
 

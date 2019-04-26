@@ -1,4 +1,5 @@
 ﻿using Dal.Model;
+using GuessNumGame.Interfaces;
 using GuessNumGame.Validators;
 using System;
 using System.Collections.Generic;
@@ -10,41 +11,30 @@ namespace GuessNumGame.GameStaff
 {
     class SoloGame : BaseGame
     {
-        public SoloGame(Player player)
+        Random random = new Random();
+
+        public SoloGame(PlayerModel player, IMessageService messageService) 
+             : base (messageService)
         {
-            Player = player;
+            gameResources.Player = player;
+            gameResources.GameType = "Solo";
         }
 
         public override void ComeUpWithNumber()
         {
-            Random random = new Random();
             Console.Clear();
-            HiddenNumber = random.Next(1, 10000);
-            MinValue = HiddenNumber - random.Next(1, HiddenNumber);
-            MaxValue = HiddenNumber + random.Next(1, HiddenNumber);
-            MaxAttempt = CalcMaxAttempt(MinValue, MaxValue);
 
-            var rangeValidator = new RangeValidator(MinValue, MaxValue);
+            SetMinMaxValue();
+            
+            gameResources.HiddenNumber = random.Next(gameResources.MinValue, gameResources.MaxValue);
 
-            if (MinValue < 0)
-            {
-                MinValue = 0;
-            }
+            gameResources.MaxAttempt = CalcMaxAttempt(gameResources.MinValue, gameResources.MaxValue);
         }
 
-        public override void EndGame()
+        public override void SetMinMaxValue()
         {
-            if (Win)
-            {
-                Player.SoloScore += MaxAttempt - Attempt;
-                Console.WriteLine($"Congratulations, you guessed the number and spend {Attempt} from {MaxAttempt} attempt(s)!");
-                Console.WriteLine($"Year score: {Player.SoloScore}");
-            }
-            else
-            {
-                Console.WriteLine($"Sorry, next time. Number was  {HiddenNumber}.");
-            }
-            Console.ReadLine();
+            gameResources.MinValue = random.Next(1, 50);
+            gameResources.MaxValue = random.Next(gameResources.MinValue + 2, 100);
         }
     }
 }
